@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/settings.css">
+</head>
+<body>
+    <!-- Background Container -->
+    <div id="background-container" class="background-container">
+        <div class="background-overlay"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Top Section -->
+        <div class="top-section">
+            <!-- Clock -->
+            <div class="clock-container" id="clock-container">
+                <div class="clock" id="clock">00:00</div>
+                <div class="date" id="date">Loading...</div>
+            </div>
+
+            <!-- Settings Button -->
+            <div class="settings-button" id="settings-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"></path>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Center Section - Pinned Apps -->
+        <div class="center-section">
+            <div class="pinned-apps-container" id="pinned-apps-container">
+                <div class="pinned-apps-grid" id="pinned-apps-grid">
+                    <!-- Pinned apps will be dynamically generated here -->
+                </div>
+                
+                <!-- Add App Button -->
+                <div class="add-app-button" id="add-app-button">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    <span>Add App</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Section - Stats -->
+        <div class="bottom-section">
+            <div class="stats-container" id="stats-container">
+                <div class="stats-card">
+                    <div class="stat-item">
+                        <div class="stat-label">Usage Today</div>
+                        <div class="stat-value" id="usage-time">0h 0m</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Tabs Opened</div>
+                        <div class="stat-value" id="tabs-opened">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Days Using</div>
+                        <div class="stat-value" id="days-using">0</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Trackers Blocked</div>
+                        <div class="stat-value" id="trackers-blocked">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button class="close-settings" id="close-settings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="settings-body">
+                <!-- Clock Settings -->
+                <div class="settings-section">
+                    <h3>Clock Settings</h3>
+                    <div class="setting-item">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="show-clock" checked>
+                            <span class="toggle-slider"></span>
+                            Show Clock
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="show-seconds">
+                            <span class="toggle-slider"></span>
+                            Show Seconds
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="24-hour-format">
+                            <span class="toggle-slider"></span>
+                            24-hour Format
+                        </label>
+                    </div>
+                </div>
+
+                <!-- App Grid Settings -->
+                <div class="settings-section">
+                    <h3>App Grid Settings</h3>
+                    <div class="setting-item">
+                        <label for="icon-padding">Icon Padding</label>
+                        <input type="range" id="icon-padding" min="8" max="32" value="16">
+                        <span id="icon-padding-value">16px</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="icon-transparency">Icon Transparency</label>
+                        <input type="range" id="icon-transparency" min="0.3" max="1" step="0.1" value="1">
+                        <span id="icon-transparency-value">100%</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="show-app-names" checked>
+                            <span class="toggle-slider"></span>
+                            Show App Names
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Background Settings -->
+                <div class="settings-section">
+                    <h3>Background Settings</h3>
+                    <div class="setting-item">
+                        <label for="background-type">Background Type</label>
+                        <select id="background-type">
+                            <option value="upload">Uploaded Images</option>
+                            <option value="color">Solid Color</option>
+                            <option value="gradient">Gradient</option>
+                            <option value="api">Online Images</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Upload Images Section -->
+                    <div id="upload-section" class="background-section">
+                        <div class="setting-item">
+                            <label for="image-upload">Upload Images</label>
+                            <input type="file" id="image-upload" multiple accept="image/*">
+                        </div>
+                        <div class="setting-item">
+                            <label for="image-cycle">Image Cycle</label>
+                            <select id="image-cycle">
+                                <option value="refresh">Each Refresh</option>
+                                <option value="newtab">Each New Tab</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="image-order">Image Order</label>
+                            <select id="image-order">
+                                <option value="random">Random</option>
+                                <option value="sequential">Sequential</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Color Section -->
+                    <div id="color-section" class="background-section" style="display: none;">
+                        <div class="setting-item">
+                            <label for="background-color">Background Color</label>
+                            <input type="color" id="background-color" value="#1a1a1a">
+                        </div>
+                    </div>
+
+                    <!-- Gradient Section -->
+                    <div id="gradient-section" class="background-section" style="display: none;">
+                        <div class="setting-item">
+                            <label for="gradient-type">Gradient Type</label>
+                            <select id="gradient-type">
+                                <option value="linear">Linear</option>
+                                <option value="radial">Radial</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="gradient-color1">Color 1</label>
+                            <input type="color" id="gradient-color1" value="#667eea">
+                        </div>
+                        <div class="setting-item">
+                            <label for="gradient-color2">Color 2</label>
+                            <input type="color" id="gradient-color2" value="#764ba2">
+                        </div>
+                    </div>
+
+                    <!-- API Section -->
+                    <div id="api-section" class="background-section" style="display: none;">
+                        <div class="setting-item">
+                            <label for="api-source">API Source</label>
+                            <select id="api-source">
+                                <option value="unsplash">Unsplash</option>
+                                <option value="pexels">Pexels</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label for="api-key">API Key</label>
+                            <input type="password" id="api-key" placeholder="Enter your API key">
+                        </div>
+                        <div class="setting-item">
+                            <label for="api-query">Search Query</label>
+                            <input type="text" id="api-query" placeholder="nature, abstract, etc." value="nature">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Settings -->
+                <div class="settings-section">
+                    <h3>Stats Settings</h3>
+                    <div class="setting-item">
+                        <label class="toggle-label">
+                            <input type="checkbox" id="show-stats" checked>
+                            <span class="toggle-slider"></span>
+                            Show Stats
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Import/Export -->
+                <div class="settings-section">
+                    <h3>Configuration</h3>
+                    <div class="setting-item">
+                        <button id="export-config" class="config-button">Export Configuration</button>
+                        <button id="import-config" class="config-button">Import Configuration</button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                    </div>
+                    <div class="setting-item">
+                        <button id="reset-config" class="config-button reset-button">Reset to Default</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Edit Modal -->
+    <div class="app-edit-modal" id="app-edit-modal">
+        <div class="app-edit-content">
+            <div class="app-edit-header">
+                <h3>Edit App</h3>
+                <button class="close-app-edit" id="close-app-edit">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="app-edit-body">
+                <div class="app-edit-item">
+                    <label for="app-name">App Name</label>
+                    <input type="text" id="app-name" placeholder="Enter app name">
+                </div>
+                <div class="app-edit-item">
+                    <label for="app-url">App URL</label>
+                    <input type="url" id="app-url" placeholder="https://example.com">
+                </div>
+                <div class="app-edit-item">
+                    <label for="app-icon">App Icon</label>
+                    <div class="icon-upload-area" id="icon-upload-area">
+                        <div class="icon-preview" id="icon-preview"></div>
+                        <div class="icon-upload-text">
+                            <p>Click to upload icon or use favicon</p>
+                            <input type="file" id="app-icon-upload" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+                    <button id="use-favicon" class="use-favicon-button">Use Favicon</button>
+                </div>
+            </div>
+            <div class="app-edit-footer">
+                <button id="save-app" class="save-app-button">Save</button>
+                <button id="delete-app" class="delete-app-button">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden file inputs for uploads -->
+    <input type="file" id="bg-upload-file" accept="image/*" multiple style="display: none;">
+    <input type="file" id="app-icon-upload" accept="image/*" style="display: none;">
+    
+    <!-- Loading indicator -->
+    <div id="loading-indicator" class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <span>Loading...</span>
+    </div>
+    <script src="scripts/clock.js"></script>
+    <script src="scripts/pinned-apps.js"></script>
+    <script src="scripts/background.js"></script>
+    <script src="scripts/settings.js"></script>
+    <script src="scripts/stats.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>

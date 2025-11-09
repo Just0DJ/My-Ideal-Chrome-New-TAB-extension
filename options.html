@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab Extension Options</title>
+    <link rel="stylesheet" href="styles/options.css">
+</head>
+<body>
+    <div class="options-container">
+        <header class="options-header">
+            <h1>New Tab Extension Options</h1>
+            <p>Customize your new tab experience</p>
+        </header>
+
+        <main class="options-content">
+            <section class="options-section">
+                <h2>Extension Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Version:</label>
+                        <span id="extension-version">1.0.0</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Last Updated:</label>
+                        <span id="last-updated">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Usage Time:</label>
+                        <span id="total-usage-time">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Tabs Opened:</label>
+                        <span id="total-tabs-opened">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="options-section">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <button id="open-settings" class="btn btn-primary">
+                        <span class="icon">⚙️</span>
+                        Open Settings
+                    </button>
+                    <button id="reset-all-data" class="btn btn-danger">
+                        <span class="icon">🗑️</span>
+                        Reset All Data
+                    </button>
+                    <button id="export-data" class="btn btn-secondary">
+                        <span class="icon">💾</span>
+                        Export Settings
+                    </button>
+                    <button id="import-data" class="btn btn-secondary">
+                        <span class="icon">📁</span>
+                        Import Settings
+                    </button>
+                </div>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+            </section>
+
+            <section class="options-section">
+                <h2>Permissions</h2>
+                <div class="permissions-list">
+                    <div class="permission-item">
+                        <input type="checkbox" id="permission-storage" checked disabled>
+                        <label for="permission-storage">Storage - Required for saving settings</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="permission-tabs" checked disabled>
+                        <label for="permission-tabs">Tabs - Required for tab counting</label>
+                    </div>
+                    <div class="permission-item">
+                        <input type="checkbox" id="permission-active-tab" checked disabled>
+                        <label for="permission-active-tab">Active Tab - Required for usage tracking</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="options-section">
+                <h2>Keyboard Shortcuts</h2>
+                <div class="shortcuts-list">
+                    <div class="shortcut-item">
+                        <kbd>Ctrl</kbd> + <kbd>,</kbd>
+                        <span>Open Settings</span>
+                    </div>
+                    <div class="shortcut-item">
+                        <kbd>Escape</kbd>
+                        <span>Close Modals</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="options-section">
+                <h2>Support & Feedback</h2>
+                <div class="support-links">
+                    <a href="#" id="report-issue" class="support-link">
+                        <span class="icon">🐛</span>
+                        Report an Issue
+                    </a>
+                    <a href="#" id="suggest-feature" class="support-link">
+                        <span class="icon">💡</span>
+                        Suggest a Feature
+                    </a>
+                    <a href="#" id="rate-extension" class="support-link">
+                        <span class="icon">⭐</span>
+                        Rate Extension
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="options-footer">
+            <p>Made with ❤️ for a better browsing experience</p>
+        </footer>
+    </div>
+
+    <script src="scripts/options.js"></script>
+</body>
+</html>
